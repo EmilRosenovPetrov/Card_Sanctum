@@ -1,5 +1,6 @@
 ﻿namespace Card_Sanctum.Controllers
 {
+    using Card_Sanctum.Core.Constants;
     using Card_Sanctum.Models;
     using Microsoft.AspNetCore.Mvc;
     using System.Diagnostics;
@@ -15,6 +16,7 @@
 
         public IActionResult Index()
         {
+            ViewData[MessageConstants.WarningMessage] = "За да използвате цялата функционалност на сайта трябва да се регистрирате!";
             return View();
         }
 
