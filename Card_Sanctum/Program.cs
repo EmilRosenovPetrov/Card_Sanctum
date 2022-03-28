@@ -1,3 +1,4 @@
+using Card_Sanctum.Core.Constants;
 using Card_Sanctum.Data;
 using Card_Sanctum.ModelBinders;
 using Microsoft.AspNetCore.Identity;
@@ -17,6 +18,7 @@ builder.Services.AddControllersWithViews()
     .AddMvcOptions(options =>
     {
         options.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider());
+        options.ModelBinderProviders.Insert(1, new DateTimeModelBinderProvider(FormatingConstants.NormalDateFormat));
     });
 
 var app = builder.Build();
