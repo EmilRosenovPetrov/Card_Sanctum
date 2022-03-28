@@ -18,7 +18,8 @@ builder.Services.AddControllersWithViews()
     .AddMvcOptions(options =>
     {
         options.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider());
-        options.ModelBinderProviders.Insert(1, new DateTimeModelBinderProvider(FormatingConstants.NormalDateFormat));
+        options.ModelBinderProviders.Insert(1, new DoubleModelBinderProvider());
+        options.ModelBinderProviders.Insert(2, new DateTimeModelBinderProvider(FormatingConstants.NormalDateFormat));
     });
 
 var app = builder.Build();
