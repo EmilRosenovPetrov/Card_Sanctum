@@ -1,5 +1,5 @@
 using Card_Sanctum.Core.Constants;
-using Card_Sanctum.Data;
+using Card_Sanctum.Infrastructure.Data;
 using Card_Sanctum.Infrastructure.Data.Identity;
 using Card_Sanctum.ModelBinders;
 using Microsoft.AspNetCore.Identity;
