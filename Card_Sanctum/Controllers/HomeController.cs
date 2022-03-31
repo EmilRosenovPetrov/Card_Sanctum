@@ -5,7 +5,7 @@
     using Microsoft.AspNetCore.Mvc;
     using System.Diagnostics;
 
-    public class HomeController : Controller
+    public class HomeController : BaseControler
     {
         private readonly ILogger<HomeController> _logger;
 
