@@ -1,5 +1,6 @@
 ﻿namespace Card_Sanctum.Infrastructure.Data
 {
+    using Card_Sanctum.Infrastructure.Data.Migrations;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -29,13 +30,23 @@
         [Column(TypeName = "decimal(5, 2)")]
         public decimal Price { get; set; }
 
-        public enum Rarety {get; set; }
+        [Required]
+        [Range(0, 6)]
+        public Rarety Rarety { get; set; }
 
+        [Required]
+        [Range(0, 10)]
+        public CardType CardType { get; set; }
 
+        [Required]
+        [Range(0, 10)]
+        public Color Color { get; set; }
 
+        [StringLength(450)]
+        public Guid? DeckId { get; set; }
 
-
-
+        [ForeignKey(nameof(DeckId))]
+        public Deck? Deck { get; set; }
 
 
     }

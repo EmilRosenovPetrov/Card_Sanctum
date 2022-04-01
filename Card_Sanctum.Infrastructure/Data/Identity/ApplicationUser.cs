@@ -27,5 +27,16 @@
         [Column(TypeName = "decimal(5, 2)")]
         [Range(0, (double)UserConstants.MaxUserBudget)]
         public decimal Budget { get; set; }
+
+        public ICollection<Card> CardCollection { get; set; }
+
+        public ICollection<Deck> Decks { get; set; }
+
+        public ApplicationUser()
+        {
+            CardCollection = new List<Card>();
+
+            Decks = new List<Deck>();
+        }
     }
 }
