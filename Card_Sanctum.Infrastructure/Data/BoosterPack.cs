@@ -4,6 +4,7 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
@@ -16,16 +17,19 @@
         [StringLength(50)]
         public string? Edition { get; set; }
 
-        public IList<Card> BoosterCards;
+        [Column(TypeName = "decimal(5, 2)")]
+        public decimal BoosterPrice { get; set; }
+
+        public ICollection<Card> BoosterCards = new List<Card>();
 
         [Required]
         [Range(0, BoosterAndCardConstants.BoosterCardCount)]
         public int CardCount { get; set; }
 
-        public BoosterPack()
-        {
-            BoosterCards = new List<Card>();
-        }
+        
+        [Required]
+        public Trade Trade { get; set; }
+       
 
     }
 }

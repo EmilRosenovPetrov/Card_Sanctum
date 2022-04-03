@@ -9,13 +9,28 @@
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
+
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Trade>().HasKey(t => new { t.BoosterPackId, t.HobbyShopId });
+
+        }
+
+
 
         public DbSet<Card> Cards { get; set; }
 
         public DbSet<Deck> Decks { get; set; }
 
         public DbSet<BoosterPack> BoosterPacks { get; set; }
+
+        public DbSet<HobbyShop> HobbyShops { get; set; }
+
+        public DbSet<Trade> Trades { get; set; }
         
     }
 }
