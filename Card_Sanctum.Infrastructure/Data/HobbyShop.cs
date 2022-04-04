@@ -27,6 +27,6 @@
 
         public ICollection<Trade> Trades { get; set; } = new List<Trade>();
 
-        public ICollection<Card> HobbyShopCards = new List<Card>();
+        public IList<Card> HobbyShopCards = new List<Card>();
     }
 }

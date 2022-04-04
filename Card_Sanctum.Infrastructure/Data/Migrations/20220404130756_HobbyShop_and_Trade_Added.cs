@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Card_Sanctum.Infrastructure.Data.Migrations
 {
-    public partial class HobbyShop_And_Trades : Migration
+    public partial class HobbyShop_and_Trade_Added : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -53,12 +53,6 @@ namespace Card_Sanctum.Infrastructure.Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Trades_BoosterPackId",
-                table: "Trades",
-                column: "BoosterPackId",
-                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Trades_HobbyShopId",

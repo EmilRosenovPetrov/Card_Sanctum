@@ -59,5 +59,11 @@
 
         [ForeignKey(nameof(BoosterPackId))]
         public BoosterPack? BoosterPack { get; set; }
+
+        [StringLength(450)]
+        public Guid? HobbyShopId { get; set; }
+
+        [ForeignKey(nameof(HobbyShopId))]
+        public HobbyShop? HobbyShop { get; set; }
     }
 }

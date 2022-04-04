@@ -20,15 +20,14 @@
         [Column(TypeName = "decimal(5, 2)")]
         public decimal BoosterPrice { get; set; }
 
-        public ICollection<Card> BoosterCards = new List<Card>();
+        public IList<Card> BoosterCards = new List<Card>();
 
         [Required]
         [Range(0, BoosterAndCardConstants.BoosterCardCount)]
         public int CardCount { get; set; }
 
         
-        [Required]
-        public Trade Trade { get; set; }
+        public ICollection<Trade> Trades { get; set; } = new List<Trade>();
        
 
     }

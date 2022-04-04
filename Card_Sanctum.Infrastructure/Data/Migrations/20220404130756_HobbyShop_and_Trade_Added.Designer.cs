@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Card_Sanctum.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220403190030_HobbyShop_And_Trades")]
-    partial class HobbyShop_And_Trades
+    [Migration("20220404130756_HobbyShop_and_Trade_Added")]
+    partial class HobbyShop_and_Trade_Added
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -239,9 +239,6 @@ namespace Card_Sanctum.Infrastructure.Data.Migrations
 
                     b.HasKey("BoosterPackId", "HobbyShopId");
 
-                    b.HasIndex("BoosterPackId")
-                        .IsUnique();
-
                     b.HasIndex("HobbyShopId");
 
                     b.ToTable("Trades");
@@ -417,8 +414,8 @@ namespace Card_Sanctum.Infrastructure.Data.Migrations
             modelBuilder.Entity("Card_Sanctum.Infrastructure.Data.Trade", b =>
                 {
                     b.HasOne("Card_Sanctum.Infrastructure.Data.BoosterPack", "BoosterPak")
-                        .WithOne("Trade")
-                        .HasForeignKey("Card_Sanctum.Infrastructure.Data.Trade", "BoosterPackId")
+                        .WithMany("Trades")
+                        .HasForeignKey("BoosterPackId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -486,8 +483,7 @@ namespace Card_Sanctum.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("Card_Sanctum.Infrastructure.Data.BoosterPack", b =>
                 {
-                    b.Navigation("Trade")
-                        .IsRequired();
+                    b.Navigation("Trades");
                 });
 
             modelBuilder.Entity("Card_Sanctum.Infrastructure.Data.Deck", b =>
