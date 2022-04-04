@@ -65,5 +65,7 @@
 
         [ForeignKey(nameof(HobbyShopId))]
         public HobbyShop? HobbyShop { get; set; }
+
+        public ICollection<CardPool> CardPools { get; set; } = new List<CardPool>();
     }
 }
