@@ -21,11 +21,8 @@
         [StringLength(200)]
         public string? Description { get; set; }
 
-        //Not implemented yet. Maybe needed for booster pack relation.
-
-       // [Required]
-       // [StringLength(50)]
-       // public string CardCode { get; set; }
+        [Required]
+        public int Quantity { get; set; }
 
         [Range(0, 100)]
         public int? Attack { get; set; }
@@ -66,6 +63,6 @@
         [ForeignKey(nameof(HobbyShopId))]
         public HobbyShop? HobbyShop { get; set; }
 
-        public ICollection<CardPool> CardPools { get; set; } = new List<CardPool>();
+        
     }
 }

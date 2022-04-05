@@ -11,6 +11,15 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddApplicationDbContexts(builder.Configuration);
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
+
+builder.Services.AddAuthentication()
+    .AddFacebook(options =>
+    {
+        options.AppId = "969540117034359";
+        options.AppSecret = "3d4cd9fa600afac5b885f8d0cc484498";
+    });
+    
+
 builder.Services.AddControllersWithViews()
     .AddMvcOptions(options =>
     {
