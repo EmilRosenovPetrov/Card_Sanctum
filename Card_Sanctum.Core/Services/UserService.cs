@@ -19,6 +19,19 @@
             repo = _repo;
         }
 
+        public async Task<UserEditViewModel> GetUserForEdit(string id)
+        {
+            var user = await repo.GetByIdAsync<ApplicationUser>(id);
+
+            return new UserEditViewModel()
+            {
+                Id = user.Id,
+                FirstName = user.FirstName,
+                PatronimicName = user.PatronymicName,
+                LastName = user.LastName,
+            };
+        }
+
         public async Task<IEnumerable<UserListViewModel>> GetUsers()
         {
             return await repo.All<ApplicationUser>().Select
@@ -28,6 +41,26 @@
                     Id = x.Id,
                     Name = $"{x.FirstName} {x.PatronymicName} {x.LastName}"
                 }).ToListAsync();
+        }
+
+        public async Task<bool> UpdateUser(UserEditViewModel model)
+        {
+            bool result = false;
+
+            var user = await repo.GetByIdAsync<ApplicationUser>(model.Id);
+
+            if (user != null)
+            {
+                user.FirstName = model.FirstName;
+                user.LastName = model.LastName;
+                user.PatronymicName = model.PatronimicName;
+
+                await repo.SaveChangesAsync();
+
+                result = true;
+            }
+
+            return result;
         }
     }
 }
