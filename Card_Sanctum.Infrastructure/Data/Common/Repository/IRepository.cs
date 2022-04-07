@@ -10,6 +10,10 @@
 
         IQueryable<T> All<T>() where T : class;
 
+        public Task<T> GetByIdAsync<T>(object id) where T : class;
+
         int SaveChanges();
+
+        Task<int> SaveChangesAsync();
     }
 }
