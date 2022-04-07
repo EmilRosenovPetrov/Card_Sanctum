@@ -10,4 +10,8 @@
     <ProjectReference Include="..\Card_Sanctum.Infrastructure\Card_Sanctum.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Contracts\" />
+  </ItemGroup>
+
 </Project>

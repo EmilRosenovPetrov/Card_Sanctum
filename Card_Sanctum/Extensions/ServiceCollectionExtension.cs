@@ -1,5 +1,6 @@
 ﻿namespace Microsoft.Extensions.DependencyInjection
 {
+    using Card_Sanctum.Core.Services;
     using Card_Sanctum.Infrastructure.Data;
     using Card_Sanctum.Infrastructure.Data.Common.Repository;
     using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,7 @@
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
             services.AddScoped<IRepository, Repository>();
+            services.AddScoped<IUserService, UserService> ();
 
             return services;
         }
