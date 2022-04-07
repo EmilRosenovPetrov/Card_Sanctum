@@ -15,8 +15,8 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.R
 builder.Services.AddAuthentication()
     .AddFacebook(options =>
     {
-        options.AppId = "969540117034359";
-        options.AppSecret = "3d4cd9fa600afac5b885f8d0cc484498";
+        options.AppId = builder.Configuration.GetValue<string>("Facebook:AppId"); //"969540117034359";
+        options.AppSecret = builder.Configuration.GetValue<string>("Facebook:AppSecret");//"3d4cd9fa600afac5b885f8d0cc484498";
     });
     
 
