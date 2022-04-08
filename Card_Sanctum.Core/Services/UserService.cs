@@ -3,6 +3,7 @@
     using Card_Sanctum.Core.Models;
     using Card_Sanctum.Infrastructure.Data.Common.Repository;
     using Card_Sanctum.Infrastructure.Data.Identity;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
     using System;
     using System.Collections.Generic;
@@ -10,13 +11,20 @@
     using System.Text;
     using System.Threading.Tasks;
 
+
     public class UserService : IUserService
     {
+
         private readonly IRepository repo;
 
         public UserService(IRepository _repo)
         {
             repo = _repo;
+        }
+
+        public async Task<ApplicationUser> GetUserById(string id)
+        {
+            return await repo.GetByIdAsync<ApplicationUser>(id);
         }
 
         public async Task<UserEditViewModel> GetUserForEdit(string id)

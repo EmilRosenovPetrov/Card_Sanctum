@@ -8,6 +8,7 @@
     using System.Text;
     using System.Threading.Tasks;
 
+
     public interface IUserService
     {
         Task<IEnumerable<UserListViewModel>> GetUsers();
@@ -16,5 +17,8 @@
 
 
         Task<bool> UpdateUser(UserEditViewModel model);
+
+        Task<ApplicationUser> GetUserById(string id);
+      
     }
 }

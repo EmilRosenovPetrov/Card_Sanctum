@@ -7,6 +7,9 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.Rendering;
+    using Microsoft.EntityFrameworkCore;
+ 
 
     public class UserController : BaseController
     {
@@ -40,7 +43,30 @@
 
         public async Task<IActionResult> Roles(string id)
         {
-            return Ok(id);
+            var user = await service.GetUserById(id);
+
+            var model = new UserRolesViewModel()
+            {
+                UserId = user.Id,
+                Name = $"{user.FirstName} {user.PatronymicName} {user.LastName}"
+            };
+
+            ViewBag.RoleItems = roleManager.Roles
+                .ToList()
+                .Select( r => new SelectListItem()
+                {
+                    Text = r.Name,
+                    Value = r.Name,
+                    Selected =  userManager.IsInRoleAsync(user, r.Name).Result
+                }).ToList();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Roles(UserRolesViewModel model)
+        {
+            return Ok(model);
         }
 
         public async Task<IActionResult> Edit(string id)
@@ -73,10 +99,10 @@
 
         public async Task<IActionResult> CreateRole()
         {
-            /*  await roleManager.CreateAsync(new IdentityRole
-              {
-                  Name = "Administrator"
-              });*/
+            await roleManager.CreateAsync(new IdentityRole
+            {
+                Name = "Planeswalker"
+            });
 
             return Ok();
         }
