@@ -1,6 +1,7 @@
 ﻿namespace Card_Sanctum.Infrastructure.Data
 {
     using Card_Sanctum.Infrastructure.Data.Identity;
+    using Card_Sanctum.Infrastructure.InitialSeed;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
 
@@ -17,6 +18,8 @@
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Trade>().HasKey(t => new { t.BoosterPackId, t.HobbyShopId });
+
+            //modelBuilder.ApplyConfiguration(new InitialDataConfiguration<Card>(@"InitialSeed/cards.json"));
 
         }
 
