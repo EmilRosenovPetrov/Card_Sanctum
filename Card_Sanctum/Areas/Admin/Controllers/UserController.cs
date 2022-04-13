@@ -97,14 +97,14 @@
             return View(model);
         }
 
-        public async Task<IActionResult> CreateRole()
-        {
-            await roleManager.CreateAsync(new IdentityRole
-            {
-                Name = "Planeswalker"
-            });
-
-            return Ok();
-        }
+      // public async Task<IActionResult> CreateRole()
+      // {
+      //     await roleManager.CreateAsync(new IdentityRole
+      //     {
+      //         Name = "Planeswalker"
+      //     });
+      //
+      //     return Ok();
+      // }
     }
 }

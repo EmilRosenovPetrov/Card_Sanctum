@@ -11,6 +11,7 @@
         {
             services.AddScoped<IRepository, Repository>();
             services.AddScoped<IUserService, UserService> ();
+            services.AddScoped<ICardService, CardService>();
 
             return services;
         }
