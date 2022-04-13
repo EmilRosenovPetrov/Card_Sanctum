@@ -22,7 +22,8 @@
         public string? Description { get; set; }
 
         [Required]
-        public int Quantity { get; set; }
+        [Range(0, 1000)]
+        public int? Quantity { get; set; }
 
         [Range(0, 100)]
         public int? Attack { get; set; }
