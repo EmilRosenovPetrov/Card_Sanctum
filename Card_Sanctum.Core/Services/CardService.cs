@@ -51,12 +51,14 @@
             return await repo.GetByIdAsync<Card>(id);
         }
 
-        public async Task<CardEditViewModel> GetCardForEdit(string id)
+        public async Task<CardEditViewModel> GetCardForEdit(Guid id)
         {
             var card = await repo.GetByIdAsync<Card>(id);
 
+
             return new CardEditViewModel()
-            {
+            { 
+                Id = card.Id,
                 Name = card.Name,
                 Description = card.Description,
                 CardType = card.CardType.ToString(),

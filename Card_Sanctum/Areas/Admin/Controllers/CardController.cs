@@ -1,5 +1,7 @@
 ﻿namespace Card_Sanctum.Areas.Admin.Controllers
 {
+    using Card_Sanctum.Core.Constants;
+    using Card_Sanctum.Core.Models;
     using Card_Sanctum.Core.Services;
     using Microsoft.AspNetCore.Mvc;
 
@@ -22,6 +24,34 @@
             var cards = await cardService.GetCards();
 
             return View(cards);
+        }
+
+        public async Task<IActionResult> Edit(Guid id)
+        {
+            var model = await cardService.GetCardForEdit(id);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(CardEditViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            if (await cardService.UpdateCard(model))
+            {
+                ViewData[MessageConstants.SuccessMessage] = "Картата беше коригирана успешно!";
+            }
+
+            else
+            {
+                ViewData[MessageConstants.ErrorMessage] = "Неуспешна корекция!";
+            }
+
+            return View(model);
         }
     }
 }

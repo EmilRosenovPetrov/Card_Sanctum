@@ -72,11 +72,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <i class="fas fa-expand-arrows-alt"></i>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-                        <i class="fas fa-th-large"></i>
-                    </a>
+                @if (User.IsInRole("Administrator"))
+                {
+                    <li class="nav-item">
+                    @*<a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#"  role="button" >
+                        <i class="fas fa-th-large"></i> Admin Panel
+                        
+                    </a>*@
+                    <form class="form-inline" asp-area="Admin" asp-controller="Home" asp-action="Index"  method="post">
+                        <i class="fas fa-door-open"></i>
+                        <button type="submit" class="nav-link btn btn-link text-dark">Admin panel</button>
+                    </form>
                 </li>
+                }
+                
                 <li class="nav-item">
                     <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
                         <i class="fas fa-door-open"></i>

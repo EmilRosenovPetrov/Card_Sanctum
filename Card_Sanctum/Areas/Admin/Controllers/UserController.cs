@@ -86,12 +86,12 @@
 
             if (await service.UpdateUser(model))
             {
-                ViewData[MessageConstants.SuccessMessage] = "Успешна корекция!";
+                ViewData[MessageConstants.SuccessMessage] = "Потребителят беше коригиран успешно!";
             }
 
             else
             {
-                ViewData[MessageConstants.ErrorMessage] = "Неуспешен запис!";
+                ViewData[MessageConstants.ErrorMessage] = "Неуспешна корекция!";
             }
 
             return View(model);

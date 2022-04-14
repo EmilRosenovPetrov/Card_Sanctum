@@ -115,7 +115,16 @@ namespace Card_Sanctum.Areas.Identity.Pages.Account
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
+                    var currentUser = await _signInManager.UserManager.FindByEmailAsync(Input.Email);
+                    var isCurrentAdmin = await _signInManager.UserManager.IsInRoleAsync(currentUser, "Administrator");
+
                     _logger.LogInformation("User logged in.");
+
+                    if (isCurrentAdmin)
+                    {
+                        return LocalRedirect("~/admin");
+                    }
+
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)

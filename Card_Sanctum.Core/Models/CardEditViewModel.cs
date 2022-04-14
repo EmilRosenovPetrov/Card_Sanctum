@@ -1,5 +1,6 @@
 ﻿namespace Card_Sanctum.Core.Models
 {
+    using Card_Sanctum.Infrastructure.Data;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -9,7 +10,7 @@
 
     public class CardEditViewModel
     {
-        public string? Id { get; set; }
+        public Guid? Id { get; set; }
 
         [Required]
         [StringLength(100)]
@@ -21,6 +22,7 @@
         public string? Description { get; set; }
 
         [Required]
+        [Range(0, 100)]
         [Display(Name = "Quantity")]
         public int? Quantity { get; set; }
 
@@ -34,17 +36,21 @@
 
         [Required]
         [Display(Name = "Price")]
+        [Range(10, 1000)]
         public decimal Price { get; set; }
 
         [Required]
+        [EnumDataType(typeof(Rarety), ErrorMessage = "Rarety must be Common, Uncommon, Rare or Legendary")]
         [Display(Name = "Rarety")]
         public string? Rarety { get; set; }
 
         [Required]
+        [EnumDataType(typeof(CardType), ErrorMessage = "Card type must be land, creature, sorcery, instant, enchantment, planeswalker or commander")]
         [Display(Name = "Type")]
         public string? CardType { get; set; }
 
         [Required]
+        [EnumDataType(typeof(Color), ErrorMessage = "Color must be Black, White, Red, Green or Blue")]
         [Display(Name = "Color")]
         public string? Color { get; set; }
     }

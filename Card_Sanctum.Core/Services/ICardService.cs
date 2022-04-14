@@ -12,7 +12,7 @@
     {
         Task<IEnumerable<CardListViewModel>> GetCards();
 
-        Task<CardEditViewModel> GetCardForEdit(string id);
+        Task<CardEditViewModel> GetCardForEdit(Guid id);
 
         Task<bool> CreateCard(CardEditViewModel model);
 
