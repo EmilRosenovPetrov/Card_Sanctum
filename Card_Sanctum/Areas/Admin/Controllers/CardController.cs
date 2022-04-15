@@ -53,5 +53,33 @@
 
             return View(model);
         }
+
+        public async Task<IActionResult> Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(CreateCardViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            if (await cardService.CreateCard(model))
+            {
+                ViewData[MessageConstants.SuccessMessage] = "Картата беше създадена успешно!";
+
+                return RedirectToAction(nameof(Create), ViewData[MessageConstants.SuccessMessage] = "Картата беше създадена успешно!");
+            }
+
+            else
+            {
+                ViewData[MessageConstants.ErrorMessage] = "Неуспешно създаване!";
+            }
+
+            return View(model);
+        }
     }
 }

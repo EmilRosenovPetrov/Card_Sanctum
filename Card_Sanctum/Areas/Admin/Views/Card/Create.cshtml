@@ -1,0 +1,74 @@
+﻿@using Card_Sanctum.Core.Models
+@model CreateCardViewModel
+@{
+    
+}
+
+<div class="row">
+    <div class="col-4">
+        <form id="create" method="post">
+            @*<input type="hidden" name="Id" value="@Model.Id" />*@
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-floating">
+                <label asp-for="Name" class="form-label"></label>
+                <input asp-for="Name" class="form-control" aria-required="true" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
+                <label asp-for="Description" class="form-label"></label>
+                <input asp-for="Description" class="form-control" aria-required="true" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
+                <label asp-for="Quantity" class="form-label"></label>
+                <input asp-for="Quantity" class="form-control" aria-required="true" />
+                <span asp-validation-for="Quantity" class="text-danger"></span>
+            </div>
+            
+            
+                <div class="form-floating">
+                <label asp-for="Attack" class="form-label"></label>
+                <input asp-for="Attack" class="form-control" aria-required="true" />
+                <span asp-validation-for="Attack" class="text-danger"></span>
+            </div> 
+            <div class="form-floating">
+                <label asp-for="Defense" class="form-label"></label>
+                <input asp-for="Defense" class="form-control" aria-required="true" />
+                <span asp-validation-for="Defense" class="text-danger"></span>
+            </div> 
+            
+             <div class="form-floating">
+                <label asp-for="Price" class="form-label"></label>
+                <input asp-for="Price" class="form-control" aria-required="true" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
+                <label asp-for="Rarety" class="form-label"></label>
+                <input asp-for="Rarety" class="form-control" aria-required="true" />
+                <span asp-validation-for="Rarety" class="text-danger"></span>
+            </div>
+             <div class="form-floating">
+                <label asp-for="CardType" class="form-label"></label>
+                <input asp-for="CardType" class="form-control" aria-required="true" />
+                <span asp-validation-for="CardType" class="text-danger"></span>
+            </div>
+             <div class="form-floating">
+                <label asp-for="Color" class="form-label"></label>
+                <input asp-for="Color" class="form-control" aria-required="true" />
+                <span asp-validation-for="Color" class="text-danger"></span>
+            </div>
+            <div class="row">               
+                <!-- /.col -->
+                <div class="col-4">
+                    <button id="login-submit" type="submit" class="btn btn-primary btn-block">Submit</button>
+                </div>
+                <!-- /.col -->
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial"/>
+}
+

@@ -12,6 +12,7 @@
             services.AddScoped<IRepository, Repository>();
             services.AddScoped<IUserService, UserService> ();
             services.AddScoped<ICardService, CardService>();
+            services.AddScoped<IBoosterPackService, BoosterPackService>();
 
             return services;
         }

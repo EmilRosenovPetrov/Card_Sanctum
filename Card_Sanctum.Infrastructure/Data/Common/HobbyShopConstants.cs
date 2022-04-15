@@ -1,4 +1,4 @@
-﻿namespace Card_Sanctum.Infrastructure.Data.Common.Repository
+﻿namespace Card_Sanctum.Infrastructure.Data.Common
 {
     using System;
     using System.Collections.Generic;

@@ -20,27 +20,31 @@
             repo = _repo;
         }
 
-        public async Task<bool> CreateCard(CardEditViewModel model)
+        public async Task<bool> CreateCard(CreateCardViewModel model)
         {
-            var result = true;
+           var result = true;
+       
 
-            if (repo.GetByIdAsync<Card>(model.Id) != null)
-            {
-                result = false;
-            }
+            Rarety currentRarety = (Rarety)Enum.Parse(typeof(Rarety), model.Rarety, true);
+            CardType currentType = (CardType)Enum.Parse(typeof(CardType), model.CardType, true);
+            Color currentColor = (Color)Enum.Parse(typeof(Color), model.Color);
 
-            repo.Add<Card>(new Card()
-            {
+            var card = new Card 
+            {   
+                Id = (Guid)model.Id, 
                 Name = model.Name,
                 Description = model.Description,
                 Attack = model.Attack,
                 Defense = model.Defense,
-                Rarety = (Rarety)Enum.Parse(typeof(Rarety), model.Rarety),
-                CardType = (CardType)Enum.Parse(typeof(CardType), model.CardType),
-                Color = (Color)Enum.Parse(typeof(Color), model.Rarety),
+                Rarety = currentRarety,
+                CardType = currentType,
+                Color = currentColor,
                 Price = model.Price,
-                Quantity = model.Quantity,               
-            });
+                Quantity = model.Quantity,
+            };
+
+            repo.Add<Card>(card);
+
 
             repo.SaveChangesAsync();
             return result;

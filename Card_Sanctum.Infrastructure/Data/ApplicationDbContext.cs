@@ -19,6 +19,10 @@
 
             modelBuilder.Entity<Trade>().HasKey(t => new { t.BoosterPackId, t.HobbyShopId });
 
+            modelBuilder.Entity<BoosterPackCard>().HasKey(bc => new { bc.BoosterPackId, bc.CardId });
+
+            
+
             //modelBuilder.ApplyConfiguration(new InitialDataConfiguration<Card>(@"InitialSeed/cards.json"));
 
         }
@@ -34,6 +38,11 @@
         public DbSet<HobbyShop> HobbyShops { get; set; }
 
         public DbSet<Trade> Trades { get; set; }
-        
+
+        public DbSet<BoosterPackCard> BoosterPackCards { get; set; } 
+
+
+
+
     }
 }

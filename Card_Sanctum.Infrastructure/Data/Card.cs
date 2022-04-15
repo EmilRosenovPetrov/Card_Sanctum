@@ -52,11 +52,7 @@
         [ForeignKey(nameof(DeckId))]
         public Deck? Deck { get; set; }
 
-        [StringLength(450)]
-        public Guid? BoosterPackId { get; set; }
-
-        [ForeignKey(nameof(BoosterPackId))]
-        public BoosterPack? BoosterPack { get; set; }
+        public ICollection<BoosterPackCard>? BoosterPacks { get; set; }
 
         [StringLength(450)]
         public Guid? HobbyShopId { get; set; }

@@ -1,6 +1,6 @@
 ﻿namespace Card_Sanctum.Infrastructure.Data
 {
-    using Card_Sanctum.Infrastructure.Data.Common.Repository;
+    using Card_Sanctum.Infrastructure.Data.Common;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;

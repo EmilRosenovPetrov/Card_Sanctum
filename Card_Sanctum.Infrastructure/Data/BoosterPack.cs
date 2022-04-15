@@ -18,16 +18,16 @@
         public string? Edition { get; set; }
 
         [Column(TypeName = "decimal(5, 2)")]
-        public decimal BoosterPrice { get; set; }
+        public decimal? BoosterPrice { get; set; }
 
-        public IList<Card> BoosterCards = new List<Card>();
+        public ICollection<BoosterPackCard>? Cards { get; set; }
 
         [Required]
         [Range(0, BoosterAndCardConstants.BoosterCardCount)]
-        public int CardCount { get; set; }
+        public int? CardCount { get; set; }
 
         
-        public ICollection<Trade> Trades { get; set; } = new List<Trade>();
+        public ICollection<Trade>? Trades { get; set; } = new List<Trade>();
        
 
     }

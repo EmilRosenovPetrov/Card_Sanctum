@@ -14,7 +14,7 @@
 
         Task<CardEditViewModel> GetCardForEdit(Guid id);
 
-        Task<bool> CreateCard(CardEditViewModel model);
+        Task<bool> CreateCard(CreateCardViewModel model);
 
         Task<bool> UpdateCard(CardEditViewModel model);
 

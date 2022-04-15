@@ -8,9 +8,9 @@
     using System.Text;
     using System.Threading.Tasks;
 
-    public class CardEditViewModel
+    public class CreateCardViewModel
     {
-        public Guid? Id { get; set; }
+        public Guid? Id { get; set; } = Guid.NewGuid();
 
         [Required]
         [StringLength(100)]
@@ -37,10 +37,10 @@
         [Required]
         [Display(Name = "Price")]
         [Range(0, 1000)]
-        public decimal Price { get; set; }
+        public int Price { get; set; }
 
         [Required]
-        [EnumDataType(typeof(Rarety), ErrorMessage = "Rarety must be Common, Uncommon, Rare or Legendary")]
+        [EnumDataType(typeof(Rarety), ErrorMessage = "Rarety must be common, uncommon, rare or legendary")]
         [Display(Name = "Rarety")]
         public string? Rarety { get; set; }
 
@@ -50,7 +50,7 @@
         public string? CardType { get; set; }
 
         [Required]
-        [EnumDataType(typeof(Color), ErrorMessage = "Color must be Black, White, Red, Green or Blue")]
+        [EnumDataType(typeof(Color), ErrorMessage = "Color must be black, white, red, green or blue")]
         [Display(Name = "Color")]
         public string? Color { get; set; }
     }

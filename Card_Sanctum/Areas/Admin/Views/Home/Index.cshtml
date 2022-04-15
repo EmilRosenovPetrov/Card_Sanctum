@@ -6,19 +6,24 @@
     <h1 class="display-4">Wellcome, ADMIN, this is your area!</h1>
     <p>You can manage cards and Users from here.</a>.</p>
 
-    <a 
-        asp-controller="User" asp-action="ManageUsers" 
+    <a asp-controller="User" asp-action="ManageUsers"
        class="btn btn-app bg-success">
         <span class="badge bg-purple"></span>
         <i class="fas fa-users"></i> Users
     </a>
 
-    <a 
-        asp-controller="Card" asp-action="ManageCards"
-        class="btn btn-app bg-danger">
+    <a asp-controller="Card" asp-action="ManageCards"
+       class="btn btn-app bg-danger">
         <span class="badge bg-teal"></span>
         <i class="fas fa-inbox"></i> Cards
     </a>
+
+    <a asp-controller="Card" asp-action="Create"
+       class="btn btn-app bg-secondary">
+        <span class="badge bg-success"></span>
+        <i class="fas fa-barcode"></i> Create Card
+    </a>
+
 </div>
 
 
