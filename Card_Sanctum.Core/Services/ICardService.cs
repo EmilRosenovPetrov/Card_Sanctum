@@ -12,6 +12,8 @@
     {
         Task<IEnumerable<CardListViewModel>> GetCards();
 
+        Task<CardPagingViewModel> GetCardsForPaging(int pageNumber, int pageSize);
+
         Task<CardEditViewModel> GetCardForEdit(Guid id);
 
         Task<bool> CreateCard(CreateCardViewModel model);

@@ -3,6 +3,7 @@
 {
     using Microsoft.EntityFrameworkCore;
     using System.Linq;
+    using System.Linq.Expressions;
 
     public class Repository : IRepository
     {
@@ -47,6 +48,20 @@
         private DbSet<T> DbSet<T>() where T : class
         {
             return dbContext.Set<T>();
+        }
+
+        public IQueryable<T> AllReadonly<T>() where T : class
+        {
+            return this.DbSet<T>()
+                .AsQueryable()
+                .AsNoTracking();
+        }
+        public IQueryable<T> AllReadonly<T>(Expression<Func<T, bool>> search) where T : class
+        {
+            return this.DbSet<T>()
+                .Where(search)
+                .AsQueryable()
+                .AsNoTracking();
         }
 
     }

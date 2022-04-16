@@ -1,6 +1,7 @@
 ﻿namespace Card_Sanctum.Infrastructure.Data.Common.Repository
 {
     using System.Linq;
+    using System.Linq.Expressions;
 
     public interface IRepository
     {
@@ -15,5 +16,9 @@
         int SaveChanges();
 
         Task<int> SaveChangesAsync();
+
+        public IQueryable<T> AllReadonly<T>() where T : class;
+
+        public IQueryable<T> AllReadonly<T>(Expression<Func<T, bool>> search) where T : class;
     }
 }

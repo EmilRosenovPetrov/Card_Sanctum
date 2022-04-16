@@ -14,9 +14,11 @@
             cardService = _cardService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index(int p = 1, int s = 10)
         {
-            return View();
+            var model = await cardService.GetCardsForPaging(p, s);
+           
+            return View(model);
         }
 
         public async Task<IActionResult> ManageCards()

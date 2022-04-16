@@ -16,7 +16,7 @@
 
         public IActionResult Index()
         {
-            ViewData[MessageConstants.WarningMessage] = "За да използвате цялата функционалност на сайта трябва да се регистрирате!";
+            ViewData[MessageConstants.SuccessMessage] = "Добре дошли в CardSanctum!!";
             return View();
         }
 
