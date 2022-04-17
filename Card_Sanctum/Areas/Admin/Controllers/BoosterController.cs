@@ -35,9 +35,9 @@
 
             if (await boosterPackService.Create(model))
             {
-                ViewData[MessageConstants.SuccessMessage] = "Картата беше създадена успешно!";
+                ViewData[MessageConstants.SuccessMessage] = "Бустерът беше създаден успешно!";
 
-                return RedirectToAction(nameof(Create), ViewData[MessageConstants.SuccessMessage] = "Картата беше създадена успешно!");
+                return RedirectToAction(nameof(Create));
             }
 
             else

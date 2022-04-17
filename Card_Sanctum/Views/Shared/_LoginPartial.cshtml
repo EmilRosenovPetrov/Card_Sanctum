@@ -7,9 +7,17 @@
 @if (SignInManager.IsSignedIn(User))
 {
     <!-- Sidebar user panel (optional) -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="~/img/emo.jpg" class="img-circle elevation-2" alt="User Image">
+            @if(User.IsInRole("Administrator"))
+            {
+                <img src="~/img/emo.jpg" class="img-circle elevation-2" alt="User Image">
+            }
+            else
+            {
+                <img src="~/img/avatar.png" class="img-circle elevation-2" alt="User Image">
+            }
+            
         </div>
         <div class="info">
           <a href="#" class="d-block">@User.Identity?.Name</a>
