@@ -41,7 +41,7 @@ namespace Card_Sanctum.Infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("BoosterPacks");
+                    b.ToTable("BoosterPacks", (string)null);
                 });
 
             modelBuilder.Entity("Card_Sanctum.Infrastructure.Data.BoosterPackCard", b =>
@@ -56,7 +56,7 @@ namespace Card_Sanctum.Infrastructure.Data.Migrations
 
                     b.HasIndex("CardId");
 
-                    b.ToTable("BoosterPackCards");
+                    b.ToTable("BoosterPackCards", (string)null);
                 });
 
             modelBuilder.Entity("Card_Sanctum.Infrastructure.Data.Card", b =>
@@ -115,7 +115,7 @@ namespace Card_Sanctum.Infrastructure.Data.Migrations
 
                     b.HasIndex("HobbyShopId");
 
-                    b.ToTable("Cards");
+                    b.ToTable("Cards", (string)null);
                 });
 
             modelBuilder.Entity("Card_Sanctum.Infrastructure.Data.Deck", b =>
@@ -138,7 +138,7 @@ namespace Card_Sanctum.Infrastructure.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Decks");
+                    b.ToTable("Decks", (string)null);
                 });
 
             modelBuilder.Entity("Card_Sanctum.Infrastructure.Data.HobbyShop", b =>
@@ -161,7 +161,7 @@ namespace Card_Sanctum.Infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("HobbyShops");
+                    b.ToTable("HobbyShops", (string)null);
                 });
 
             modelBuilder.Entity("Card_Sanctum.Infrastructure.Data.Identity.ApplicationUser", b =>
@@ -259,7 +259,7 @@ namespace Card_Sanctum.Infrastructure.Data.Migrations
 
                     b.HasIndex("HobbyShopId");
 
-                    b.ToTable("Trades");
+                    b.ToTable("Trades", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

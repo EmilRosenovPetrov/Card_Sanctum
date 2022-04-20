@@ -32,15 +32,22 @@
                 BoosterPrice = model.Price,
                 CardCount = BoosterAndCardConstants.BoosterCardCount,
                 
-            };         
+            };
 
-            var commonCards = repo.All<Card>().Where(c => c.Rarety == Rarety.common).ToList();
+            var allCards = repo.All<Card>().Include(c => c.BoosterPackCards).ThenInclude(b => b.BoosterPack).ToListAsync();
 
-            var uncommonCards = repo.All<Card>().Where(c => c.Rarety == Rarety.uncommon).ToList();
+            
 
-            var rareCards = repo.All<Card>().Where(c => c.Rarety == Rarety.rare || c.Rarety == Rarety.legendary).ToList();
+
+
+            var commonCards = allCards.Result.Where(c => c.Rarety == Rarety.common).ToList();
+
+            var uncommonCards = allCards.Result.Where(c => c.Rarety == Rarety.uncommon).ToList();
+
+            var rareCards = allCards.Result.Where(c => c.Rarety == Rarety.rare || c.Rarety == Rarety.legendary).ToList();
 
             var cardsToAdd = new List<BoosterPackCard>();
+
 
             if (commonCards.Count < 6 || uncommonCards.Count < 3 || rareCards.Count < 1)
             {
@@ -57,7 +64,9 @@
                 cardsToAdd.Add(new BoosterPackCard
                 {
                     BoosterPackId = booster.Id,
+                    BoosterPack = booster,
                     CardId = commonCards[index].Id,
+                    Card = commonCards[index]
                 });
             }
 
@@ -67,7 +76,9 @@
                 cardsToAdd.Add(new BoosterPackCard
                 {
                     BoosterPackId = booster.Id,
+                    BoosterPack = booster,
                     CardId = uncommonCards[index].Id,
+                    Card = uncommonCards[index]
                 });
             }
 
@@ -75,14 +86,18 @@
             cardsToAdd.Add(new BoosterPackCard
             {
                 BoosterPackId = booster.Id,
+                BoosterPack = booster,
                 CardId = rareCards[next].Id,
+                Card = rareCards[next]
             });
 
-            booster.Cards = cardsToAdd;
+            //repo.Add(booster);
+            //repo.SaveChanges();
+            booster.BoosterPackCards = cardsToAdd;
 
             try
             {
-                repo.Add(cardsToAdd);
+                //repo.Add(cardsToAdd);
                 repo.Add(booster);
                 repo.SaveChanges();
                 result = true;               

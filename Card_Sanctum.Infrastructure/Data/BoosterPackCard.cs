@@ -11,12 +11,12 @@
     public class BoosterPackCard
     {
         [Required]
-        public Guid CardId { get; set; }
+        public Guid? CardId { get; set; }
         [ForeignKey(nameof(CardId))]
         public Card? Card { get; set; }
 
         [Required]
-        public Guid BoosterPackId { get; set; }
+        public Guid? BoosterPackId { get; set; }
         [ForeignKey(nameof(BoosterPackId))]
         public BoosterPack? BoosterPack { get; set; }
     }
