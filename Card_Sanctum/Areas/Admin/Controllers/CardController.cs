@@ -23,7 +23,13 @@
         public async Task<IActionResult> Index(int p = 1, int s = 10, string message = null)
         {
             var model = await cardService.GetCardsForPaging(p, s);
-           
+
+            if (!string.IsNullOrEmpty(message))
+            {
+                ViewData[MessageConstants.InfoMessage] = message;
+            }
+
+
             return View(model);
         }
 
@@ -93,16 +99,10 @@
         [HttpPost]
         public async Task<IActionResult> AddToCollection(string id)
         {
-            if (await cardService.AddToCollection(id, userManager.GetUserId(User)))
-            {
-                ViewData[MessageConstants.SuccessMessage] = "Картата беше добавена успешно!";
-            }
-            else
-            {
-                ViewData[MessageConstants.ErrorMessage] = "Картата не беше добавена успешно!";
-            }
+            string result = await cardService.AddToCollection(id, userManager.GetUserId(User));
 
-            return this.RedirectToAction(nameof(this.Index));
+
+            return this.RedirectToAction(nameof(this.Index), "Card", new { message = result });
         }
     }
 }

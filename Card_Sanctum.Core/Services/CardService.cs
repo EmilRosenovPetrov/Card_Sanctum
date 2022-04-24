@@ -20,15 +20,21 @@
             repo = _repo;
         }
 
-       public async Task<bool> AddToCollection(string cardId, string userId)
+       public async Task<string> AddToCollection(string cardId, string userId)
        {
             if (string.IsNullOrEmpty(cardId) || string.IsNullOrEmpty(userId))
             {
-                return false;
+                return "Неуспешно добавяне на карта във вашата колекция!";
             }
       
            var user = await repo.All<ApplicationUser>().Where(u => u.Id == userId).SingleOrDefaultAsync();
            var card = await repo.All<Card>().Where(c => c.Id.ToString() == cardId).SingleOrDefaultAsync();
+           var userCards = repo.All<Card>().Where(c => c.Users.Any(u => u.Id == user.Id)).ToListAsync();
+
+            if (userCards.Result.Contains(card))
+            {
+                return "Картата вече е във вашата колекция!";
+            }
 
             user.Cards.Add(card);
 
@@ -39,11 +45,11 @@
             catch (Exception)
             {
 
-                return false;
+                return "Неуспешно добавяне в колекцията!";
                 
             }
 
-            return true;
+            return "Картата е добавена успешно!";
         }
 
         public async Task<string> AddToUserCollection(string cardId, string userId)
@@ -58,9 +64,11 @@
             var user = await repo.All<ApplicationUser>().Where(u => u.Id == userId).SingleOrDefaultAsync();
             var card = await repo.All<Card>().Where(c => c.Id.ToString() == cardId).SingleOrDefaultAsync();
 
-            if (user.Cards.Any(c => c.Id == card.Id))
+            var userCards = repo.All<Card>().Where(c => c.Users.Any(u => u.Id == user.Id)).ToListAsync();
+
+            if (userCards.Result.Contains(card))
             {
-                return "Вече имате тази катра!";
+                return "Картата вече е във вашата колекция!";
             }
 
             if (user.Budget < card.Price)
@@ -72,7 +80,9 @@
 
             try
             {
+                user.Budget -= card.Price;
                 await repo.SaveChangesAsync();
+
             }
             catch (Exception)
             {
