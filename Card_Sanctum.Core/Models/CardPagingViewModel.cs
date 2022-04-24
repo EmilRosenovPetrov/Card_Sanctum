@@ -8,7 +8,7 @@
     using System.Threading.Tasks;
 
     public class CardPagingViewModel
-    {
+    {      
         public int PageNumber { get; set; }
 
         public int TotalRecords { get; set; }

@@ -7,5 +7,7 @@
         public const string SuccessMessage = "Successs Message!";
 
         public const string WarningMessage = "Warning Message!";
+
+        public const string InfoMessage = "Info Message";
     }
 }

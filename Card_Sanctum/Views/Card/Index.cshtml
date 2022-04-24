@@ -22,22 +22,29 @@
                     <th>Rarety</th>
                     <th>Color</th>
                     <th>Price</th>
-                    <th>Quantity</th>
+                    <th>Quantity</th>                 
 
                 </tr>
             </thead>
             @foreach (var card in Model.Cards)
             {
-                <tbody>
-                    <tr>
+                @using (Html.BeginForm("AddToUserCollection", "Card", FormMethod.Post))
+                {
+                    @Html.Hidden("id", card.Id);
+                    <tbody>
+                        <tr>
                         <td>@card.Name</td>
                         <td>@card.CardType</td>
                         <td>@card.Rarety</td>
                         <td>@card.Color</td>
                         <td>@card.Price</td>
                         <td>@card.Quantity</td>
+                        <td>
+                            <button id="Index" method="post" class="btn btn-primary">Buy</button>                                                    
+                       </td>
                     </tr>
                 </tbody>
+                }
             }
 
         </table>

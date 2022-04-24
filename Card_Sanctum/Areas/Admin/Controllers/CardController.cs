@@ -3,18 +3,24 @@
     using Card_Sanctum.Core.Constants;
     using Card_Sanctum.Core.Models;
     using Card_Sanctum.Core.Services;
+    using Card_Sanctum.Infrastructure.Data;
+    using Card_Sanctum.Infrastructure.Data.Identity;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
     public class CardController : BaseController
     {
         private ICardService cardService;
 
-        public CardController(ICardService _cardService)
+        private readonly UserManager<ApplicationUser> userManager;
+
+        public CardController(ICardService _cardService, UserManager<ApplicationUser> _userManager)
         {
             cardService = _cardService;
+            userManager = _userManager;
         }
 
-        public async Task<IActionResult> Index(int p = 1, int s = 10)
+        public async Task<IActionResult> Index(int p = 1, int s = 10, string message = null)
         {
             var model = await cardService.GetCardsForPaging(p, s);
            
@@ -82,6 +88,21 @@
             }
 
             return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddToCollection(string id)
+        {
+            if (await cardService.AddToCollection(id, userManager.GetUserId(User)))
+            {
+                ViewData[MessageConstants.SuccessMessage] = "Картата беше добавена успешно!";
+            }
+            else
+            {
+                ViewData[MessageConstants.ErrorMessage] = "Картата не беше добавена успешно!";
+            }
+
+            return this.RedirectToAction(nameof(this.Index));
         }
     }
 }

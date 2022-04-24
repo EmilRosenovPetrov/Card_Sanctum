@@ -28,7 +28,18 @@
         $(function() {
 
             toastr.success('@ViewData[MessageConstants.SuccessMessage]?.ToString()');
-
         });
     </script>
+}
+
+@if (ViewData[MessageConstants.InfoMessage] != null)
+{
+    <script>
+        $(function() {
+
+            toastr.info('@ViewData[MessageConstants.InfoMessage]?.ToString()');
+        });
+    </script>
+
+
 }

@@ -14,5 +14,6 @@ html {
 }
 
 body {
-  background-image: url(~/img/Layout.jpg)
+    background-color: red !important;
+  background-image: url(~/img/Background.png)
 }

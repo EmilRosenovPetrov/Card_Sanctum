@@ -20,7 +20,7 @@
         [Column(TypeName = "decimal(5, 2)")]
         public decimal? BoosterPrice { get; set; }
 
-        public ICollection<BoosterPackCard>? BoosterPackCards { get; set; } = new List<BoosterPackCard>();
+        public ICollection<Card>? Cards { get; set; } = new List<Card>();
 
         [Required]
         [Range(0, BoosterAndCardConstants.BoosterCardCount)]

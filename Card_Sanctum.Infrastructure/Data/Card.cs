@@ -1,5 +1,6 @@
 ﻿namespace Card_Sanctum.Infrastructure.Data
 {
+    using Card_Sanctum.Infrastructure.Data.Identity;
     using Card_Sanctum.Infrastructure.Data.Migrations;
     using System;
     using System.Collections.Generic;
@@ -52,7 +53,9 @@
         [ForeignKey(nameof(DeckId))]
         public Deck? Deck { get; set; }
 
-        public ICollection<BoosterPackCard>? BoosterPackCards { get; set; } = new List<BoosterPackCard>();
+        public ICollection<BoosterPack>? BoosterPackCards { get; set; } = new List<BoosterPack>();
+
+        public ICollection<ApplicationUser>? Users { get; set; } = new List<ApplicationUser>();
 
         [StringLength(450)]
         public Guid? HobbyShopId { get; set; }

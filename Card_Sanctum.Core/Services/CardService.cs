@@ -20,6 +20,70 @@
             repo = _repo;
         }
 
+       public async Task<bool> AddToCollection(string cardId, string userId)
+       {
+            if (string.IsNullOrEmpty(cardId) || string.IsNullOrEmpty(userId))
+            {
+                return false;
+            }
+      
+           var user = await repo.All<ApplicationUser>().Where(u => u.Id == userId).SingleOrDefaultAsync();
+           var card = await repo.All<Card>().Where(c => c.Id.ToString() == cardId).SingleOrDefaultAsync();
+
+            user.Cards.Add(card);
+
+            try
+            {
+               await repo.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+
+                return false;
+                
+            }
+
+            return true;
+        }
+
+        public async Task<string> AddToUserCollection(string cardId, string userId)
+        {
+            
+
+            if (string.IsNullOrEmpty(cardId) || string.IsNullOrEmpty(userId))
+            {
+                return "Неуспешно добавяне на картата!";
+            }
+
+            var user = await repo.All<ApplicationUser>().Where(u => u.Id == userId).SingleOrDefaultAsync();
+            var card = await repo.All<Card>().Where(c => c.Id.ToString() == cardId).SingleOrDefaultAsync();
+
+            if (user.Cards.Any(c => c.Id == card.Id))
+            {
+                return "Вече имате тази катра!";
+            }
+
+            if (user.Budget < card.Price)
+            {
+                return "Недостатъчно парички за картата!";
+            }
+
+            user.Cards.Add(card);
+
+            try
+            {
+                await repo.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+
+                return "Неуспешно добавяне на картата!";
+
+            }
+
+            return "Успешно добавяне на картата!";
+        }
+
         public async Task<bool> CreateCard(CreateCardViewModel model)
         {
            var result = true;

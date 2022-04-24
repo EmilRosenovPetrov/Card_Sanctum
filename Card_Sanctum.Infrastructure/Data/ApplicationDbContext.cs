@@ -7,7 +7,9 @@
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
             : base(options)
         {
 
@@ -19,7 +21,7 @@
 
             modelBuilder.Entity<Trade>().HasKey(t => new { t.BoosterPackId, t.HobbyShopId });
 
-            modelBuilder.Entity<BoosterPackCard>().HasKey(bc => new { bc.BoosterPackId, bc.CardId });
+          
 
             
 
@@ -39,7 +41,7 @@
 
         public DbSet<Trade> Trades { get; set; }
 
-        public DbSet<BoosterPackCard> BoosterPackCards { get; set; } 
+
 
 
 

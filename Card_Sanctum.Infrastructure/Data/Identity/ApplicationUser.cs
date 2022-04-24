@@ -28,15 +28,9 @@
         [Range(0, (double)UserConstants.MaxUserBudget)]
         public decimal Budget { get; set; }
 
-        public ICollection<Card> CardCollection { get; set; }
+        public ICollection<Card>? Cards { get; set; } = new List<Card>();
 
-        public ICollection<Deck> Decks { get; set; }
+        public ICollection<Deck>? Decks { get; set; } = new List<Deck>();
 
-        public ApplicationUser()
-        {
-            CardCollection = new List<Card>();
-
-            Decks = new List<Deck>();
-        }
     }
 }

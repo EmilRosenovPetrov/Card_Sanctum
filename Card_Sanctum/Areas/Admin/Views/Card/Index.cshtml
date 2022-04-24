@@ -28,16 +28,27 @@
             </thead>
             @foreach (var card in Model.Cards)
             {
-                <tbody>
-                    <tr>
+                @using (Html.BeginForm("AddToCollection", "Card", FormMethod.Post))
+                {
+                    @Html.Hidden("id", card.Id);
+                    <tbody>
+                        <tr>
                         <td>@card.Name</td>
                         <td>@card.CardType</td>
                         <td>@card.Rarety</td>
                         <td>@card.Color</td>
                         <td>@card.Price</td>
                         <td>@card.Quantity</td>
+                        <td>
+                            <button id="Index" method="post" class="btn btn-primary">Add to collection</button>
+                           
+                           @*<button class="btn btn-primary btn-block" asp-area = "admin" asp-action = "AddToCollection" asp-controller = "card" asp-route-id=@card.Id>Add to collection</button>*@
+
+                           @*<a asp-area = "admin" asp-action = "index" asp-controller = "card"  class="btn btn-block btn-outline-dark btn-sm">Edit</a>*@
+                        </td>
                     </tr>
                 </tbody>
+                }
             }
 
         </table>

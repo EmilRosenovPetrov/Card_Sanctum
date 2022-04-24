@@ -21,5 +21,9 @@
         Task<bool> UpdateCard(CardEditViewModel model);
 
         Task<Card> GetCardById(string id);
+
+        Task<bool> AddToCollection(string cardId, string userId);
+
+        Task<string> AddToUserCollection(string cardId, string userId);
     }
 }
