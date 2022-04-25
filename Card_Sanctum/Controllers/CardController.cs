@@ -30,6 +30,17 @@
             return View(model);
         }
 
+        public async Task<IActionResult> UserCards(int p = 1, int s = 10, string message = null)
+        {
+            var user = await userManager.GetUserAsync(User);
+
+            var userId = await userManager.GetUserIdAsync(user);
+
+            var model = await cardService.GetCardsForPaging(p, s, userId);
+          
+            return View(model);
+        }
+
         [HttpPost]
         public async Task<IActionResult> AddToUserCollection(string id)
         {

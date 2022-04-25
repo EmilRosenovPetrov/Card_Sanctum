@@ -62,6 +62,7 @@
                 user.FirstName = model.FirstName;
                 user.LastName = model.LastName;
                 user.PatronymicName = model.PatronimicName;
+                user.Budget = (decimal)model.Budget;
 
                 await repo.SaveChangesAsync();
 

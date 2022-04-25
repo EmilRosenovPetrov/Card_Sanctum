@@ -1,5 +1,6 @@
 ﻿namespace Card_Sanctum.Core.Models
 {
+    using Microsoft.EntityFrameworkCore;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -8,7 +9,7 @@
     using System.Threading.Tasks;
 
     public class UserEditViewModel
-    { 
+    {
         public string? Id { get; set; }
 
         [Required]
@@ -24,5 +25,11 @@
         [Required]
         [Display(Name = "Last Name")]
         public string? LastName { get; set; }
+
+        [Required]
+        [Display(Name = "Budget")]
+        [RegularExpression(@"^\d+(\.\d)?$", ErrorMessage = "It cannot have more than one decimal point value")]
+        [Range(0.1, 999.99)]
+        public decimal? Budget { get; set; }
     }
 }

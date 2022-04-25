@@ -1,0 +1,48 @@
+﻿@using Card_Sanctum.Core.Models
+@model CardPagingViewModel
+
+<paging page-no="@Model.PageNumber"
+        page-size="@Model.PageSize"
+        total-records="@Model.TotalRecords"
+        page-size-dropdown-items="5-10-20">
+</paging>
+
+<div class="card">
+    <div class="card-header">
+        <h1 class="card-title">All your cards:</h1>
+    </div>
+
+    <div class="card-body p-0">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Rarety</th>
+                    <th>Color</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+
+                </tr>
+            </thead>
+            @foreach (var card in Model.Cards)
+            {
+                @Html.Hidden("id", card.Id)
+                ;
+                <tbody>
+                    <tr>
+                        <td>@card.Name</td>
+                        <td>@card.CardType</td>
+                        <td>@card.Rarety</td>
+                        <td>@card.Color</td>
+                        <td>@card.Price</td>
+                        <td>@card.Quantity</td>
+                    </tr>
+                </tbody>          
+            }
+
+        </table>
+    </div>
+
+</div>

@@ -161,22 +161,40 @@
                 }).ToListAsync();
         }
 
-        public async Task<CardPagingViewModel> GetCardsForPaging(int pageNumber, int pageSize)
+        public async Task<CardPagingViewModel> GetCardsForPaging(int pageNumber, int pageSize, string id = null)
         {
+
             CardPagingViewModel result = new CardPagingViewModel()
             {
                 PageNumber = pageNumber,
                 PageSize = pageSize
             };
 
-            result.TotalRecords = await repo.All<Card>().CountAsync();
+            if (string.IsNullOrEmpty(id))
+            {              
+                result.TotalRecords = await repo.All<Card>().CountAsync();
+                result.Cards = await repo.AllReadonly<Card>()
+                    .OrderBy(c => c.Name)
+                    .Skip(pageNumber * pageSize - pageSize)
+                    .Take(pageSize)
+                    .ToListAsync();
+
+                return result;
+            }
+
+            var user = await repo.All<ApplicationUser>().SingleOrDefaultAsync(u => u.Id == id);
+
+            result.TotalRecords = await repo.All<Card>().Where(c => c.Users.Contains(user)).CountAsync();
+
             result.Cards = await repo.AllReadonly<Card>()
+                .Where(c => c.Users.Contains(user))
                 .OrderBy(c => c.Name)
                 .Skip(pageNumber * pageSize - pageSize)
                 .Take(pageSize)
                 .ToListAsync();
 
-                return result;
+            return result;
+            
         }
 
         public async Task<bool> UpdateCard(CardEditViewModel model)

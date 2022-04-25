@@ -12,7 +12,7 @@
     {
         Task<IEnumerable<CardListViewModel>> GetCards();
 
-        Task<CardPagingViewModel> GetCardsForPaging(int pageNumber, int pageSize);
+        Task<CardPagingViewModel> GetCardsForPaging(int pageNumber, int pageSize, string id = null);
 
         Task<CardEditViewModel> GetCardForEdit(Guid id);
 
