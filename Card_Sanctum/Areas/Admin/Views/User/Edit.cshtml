@@ -24,10 +24,15 @@
                 <input asp-for="LastName" class="form-control" aria-required="true" />
                 <span asp-validation-for="LastName" class="text-danger"></span>
             </div>
+            <div class="form-floating">
+                <label asp-for="Budget" class="form-label"></label>
+                <input asp-for="Budget" class="form-control" aria-required="true" />
+                <span asp-validation-for="Budget" class="text-danger"></span>
+            </div>
             <div class="row">               
                 <!-- /.col -->
                 <div class="col-4">
-                    <button id="login-submit" type="submit" class="btn btn-primary btn-block">Submit</button>
+                    <button id="login-submit" type="submit" style="margin-top: 10px" class="btn btn-primary btn-block">Submit</button>
                 </div>
                 <!-- /.col -->
             </div>
