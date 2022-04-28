@@ -4,6 +4,7 @@ using Card_Sanctum.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Card_Sanctum.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220425155540_Deck_Description_Added")]
+    partial class Deck_Description_Added
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -89,6 +91,10 @@ namespace Card_Sanctum.Infrastructure.Data.Migrations
                     b.Property<int>("Color")
                         .HasColumnType("int");
 
+                    b.Property<Guid?>("DeckId")
+                        .HasMaxLength(450)
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<int?>("Defense")
                         .HasColumnType("int");
 
@@ -116,6 +122,8 @@ namespace Card_Sanctum.Infrastructure.Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DeckId");
 
                     b.HasIndex("HobbyShopId");
 
@@ -268,21 +276,6 @@ namespace Card_Sanctum.Infrastructure.Data.Migrations
                     b.HasIndex("HobbyShopId");
 
                     b.ToTable("Trades");
-                });
-
-            modelBuilder.Entity("CardDeck", b =>
-                {
-                    b.Property<Guid>("CardsId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("DecksId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("CardsId", "DecksId");
-
-                    b.HasIndex("DecksId");
-
-                    b.ToTable("CardDeck");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -454,9 +447,15 @@ namespace Card_Sanctum.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("Card_Sanctum.Infrastructure.Data.Card", b =>
                 {
+                    b.HasOne("Card_Sanctum.Infrastructure.Data.Deck", "Deck")
+                        .WithMany("Cards")
+                        .HasForeignKey("DeckId");
+
                     b.HasOne("Card_Sanctum.Infrastructure.Data.HobbyShop", "HobbyShop")
                         .WithMany()
                         .HasForeignKey("HobbyShopId");
+
+                    b.Navigation("Deck");
 
                     b.Navigation("HobbyShop");
                 });
@@ -489,21 +488,6 @@ namespace Card_Sanctum.Infrastructure.Data.Migrations
                     b.Navigation("BoosterPak");
 
                     b.Navigation("HobbyShop");
-                });
-
-            modelBuilder.Entity("CardDeck", b =>
-                {
-                    b.HasOne("Card_Sanctum.Infrastructure.Data.Card", null)
-                        .WithMany()
-                        .HasForeignKey("CardsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Card_Sanctum.Infrastructure.Data.Deck", null)
-                        .WithMany()
-                        .HasForeignKey("DecksId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -560,6 +544,11 @@ namespace Card_Sanctum.Infrastructure.Data.Migrations
             modelBuilder.Entity("Card_Sanctum.Infrastructure.Data.BoosterPack", b =>
                 {
                     b.Navigation("Trades");
+                });
+
+            modelBuilder.Entity("Card_Sanctum.Infrastructure.Data.Deck", b =>
+                {
+                    b.Navigation("Cards");
                 });
 
             modelBuilder.Entity("Card_Sanctum.Infrastructure.Data.HobbyShop", b =>

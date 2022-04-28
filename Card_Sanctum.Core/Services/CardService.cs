@@ -120,7 +120,7 @@
             repo.Add<Card>(card);
 
 
-            repo.SaveChangesAsync();
+            await repo.SaveChangesAsync();
             return result;
         }
 
@@ -221,6 +221,27 @@
             }
 
             return result;
+        }
+
+        public async Task<bool> Add(string cardId, string deckId)
+        {
+
+
+
+            var deck = await repo.All<Deck>().Where(d => d.Id.ToString() == deckId).SingleOrDefaultAsync();
+            var card = await repo.All<Card>().Where(c => c.Id.ToString() == cardId).SingleOrDefaultAsync();
+
+
+            if (deck.Cards.Any(c => c.Id.ToString() == cardId))
+            {
+                return false;
+            }
+
+            deck.Cards.Add(card);
+            await repo.SaveChangesAsync();
+
+            return true;
+
         }
     }
 }

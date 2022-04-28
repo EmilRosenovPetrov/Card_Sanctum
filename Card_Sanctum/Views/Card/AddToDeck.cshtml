@@ -1,0 +1,36 @@
+﻿@using Card_Sanctum.Core.Models
+@model UserDecksViewModel
+@{
+    ViewData["Title"] = "Decks";
+    var items = (List<SelectListItem>)ViewBag.DeckItems;
+}
+
+<div class="row">
+    <div class="col-4">
+       @using (Html.BeginForm("Add", "Card", FormMethod.Post))
+       {
+            <input type="hidden" name="UserId" value="@Model.UserId" />
+            <input type="hidden" name="CardId" value="@Model.CardId" />
+            <input type="hidden" name="Name" value="@Model.Name" />
+            @*<input type="hidden" name="DeckId" value="@items.Value" />*@
+            
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-floating">
+              <h3>@Html.DisplayFor(m => m.Name)</h3>  
+            </div>
+            <div class="form-floating">
+                <div class="form-group">
+                    <label>User Decks:</label>
+                    <select asp-for = "DeckNames" id="Name" asp-items="@items" single="" class="form-control"></select>
+                </div>
+            </div>
+            <div class="row">
+                <!-- /.col -->
+                <div class="col-4">
+                    <button id="Id" type="submit" value="Submit" class="btn btn-primary btn-block">Add card</button>
+                </div>
+                <!-- /.col -->
+            </div>
+        }
+    </div>
+</div>

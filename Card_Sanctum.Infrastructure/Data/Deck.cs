@@ -13,6 +13,10 @@
         [StringLength(50)]
         public string Name { get; set; }
 
+        
+        [StringLength(500)]
+        public string? Description { get; set; }
+
         [Required]
         [StringLength(450)]
         public string UserId { get; set; }

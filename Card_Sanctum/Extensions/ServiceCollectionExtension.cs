@@ -13,6 +13,8 @@
             services.AddScoped<IUserService, UserService> ();
             services.AddScoped<ICardService, CardService>();
             services.AddScoped<IBoosterPackService, BoosterPackService>();
+            services.AddScoped<IDeckService, DeckService>();
+            
 
             return services;
         }

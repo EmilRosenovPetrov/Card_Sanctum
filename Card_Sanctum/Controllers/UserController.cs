@@ -7,7 +7,7 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
-    public class UserController : BaseControler
+    public class UserController : BaseController
     {
         private readonly RoleManager<IdentityRole> roleManager;
 

@@ -28,18 +28,24 @@
             </thead>
             @foreach (var card in Model.Cards)
             {
-                @Html.Hidden("id", card.Id)
-                ;
-                <tbody>
-                    <tr>
-                        <td>@card.Name</td>
-                        <td>@card.CardType</td>
-                        <td>@card.Rarety</td>
-                        <td>@card.Color</td>
-                        <td>@card.Price</td>
-                        <td>@card.Quantity</td>
-                    </tr>
-                </tbody>          
+                @using (Html.BeginForm("AddToDeck", "Card", FormMethod.Post))
+                {
+                    @Html.Hidden("id", card.Id)
+                    ;
+                    <tbody>
+                        <tr>
+                            <td>@card.Name</td>
+                            <td>@card.CardType</td>
+                            <td>@card.Rarety</td>
+                            <td>@card.Color</td>
+                            <td>@card.Price</td>
+                            <td>@card.Quantity</td>
+                            <td>
+                                <button id="id" method="post" class="btn btn-primary">Add to deck</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                }
             }
 
         </table>

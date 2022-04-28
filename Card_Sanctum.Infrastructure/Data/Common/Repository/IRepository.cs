@@ -20,5 +20,7 @@
         public IQueryable<T> AllReadonly<T>() where T : class;
 
         public IQueryable<T> AllReadonly<T>(Expression<Func<T, bool>> search) where T : class;
+
+        public Task AddAsync<T>(T entity) where T : class;
     }
 }

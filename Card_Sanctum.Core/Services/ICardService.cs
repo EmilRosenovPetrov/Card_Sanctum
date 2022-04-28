@@ -25,5 +25,7 @@
         Task<string> AddToCollection(string cardId, string userId);
 
         Task<string> AddToUserCollection(string cardId, string userId);
+
+        Task<bool> Add(string cardId, string deckId);
     }
 }

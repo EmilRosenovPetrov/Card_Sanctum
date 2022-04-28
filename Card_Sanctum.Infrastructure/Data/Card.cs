@@ -47,11 +47,8 @@
         [Range(0, 10)]
         public Color Color { get; set; }
 
-        [StringLength(450)]
-        public Guid? DeckId { get; set; }
 
-        [ForeignKey(nameof(DeckId))]
-        public Deck? Deck { get; set; }
+        public ICollection<Deck>? Decks { get; set; } = new List<Deck>();
 
         public ICollection<BoosterPack>? BoosterPackCards { get; set; } = new List<BoosterPack>();
 
