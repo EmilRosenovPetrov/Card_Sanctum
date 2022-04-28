@@ -4,6 +4,7 @@ using Card_Sanctum.Infrastructure.Data.Identity;
 using Card_Sanctum.ModelBinders;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using SignalRChat.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,6 +32,7 @@ builder.Services.AddControllersWithViews()
     });
 
 builder.Services.AddApplicationServices();
+builder.Services.AddSignalR();
 
 var app = builder.Build();
 
@@ -65,5 +67,7 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
+
+app.MapHub<ChatHub>("/chatHub");
 
 app.Run();
