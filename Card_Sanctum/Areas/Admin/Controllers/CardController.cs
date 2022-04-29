@@ -70,6 +70,9 @@
 
         public async Task<IActionResult> Create()
         {
+            ViewData[MessageConstants.SuccessMessage] = TempData[MessageConstants.SuccessMessage];
+            ViewData[MessageConstants.ErrorMessage] = TempData[MessageConstants.ErrorMessage];
+
             return View();
         }
 
@@ -82,15 +85,14 @@
             }
 
             if (await cardService.CreateCard(model))
-            {
-                ViewData[MessageConstants.SuccessMessage] = "Картата беше създадена успешно!";
+            {                
 
-                return RedirectToAction(nameof(Create), ViewData[MessageConstants.SuccessMessage] = "Картата беше създадена успешно!");
+                return RedirectToAction(nameof(Create), TempData[MessageConstants.SuccessMessage] = "Картата беше създадена успешно!");
             }
 
             else
             {
-                ViewData[MessageConstants.ErrorMessage] = "Неуспешно създаване!";
+                TempData[MessageConstants.ErrorMessage] = "Неуспешно създаване!";
             }
 
             return View(model);

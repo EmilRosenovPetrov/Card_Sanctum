@@ -49,21 +49,17 @@
 
             if (!ModelState.IsValid)
             {
-                ViewData[MessageConstants.ErrorMessage] = "Невалидни данни!";
+                TempData[MessageConstants.ErrorMessage] = "Невалидни данни!";
                 return View(model);
             }
 
             if (await deckService.CreateDeck(model, userId))
             {
 
-                return RedirectToAction(nameof(Index), ViewData[MessageConstants.SuccessMessage] = "Тестето беше създадено успешно!");
+                return RedirectToAction(nameof(Index), TempData[MessageConstants.SuccessMessage] = "Тестето беше създадено успешно!");
             }
 
-
-            ViewData[MessageConstants.ErrorMessage] = "Неуспешно създаване!";
-
-
-            return View(model);
+            return RedirectToAction(nameof(Index), TempData[MessageConstants.ErrorMessage] = "Неуспешно създаване!");
         }
 
         public async Task<IActionResult> Edit(Guid id)
@@ -98,15 +94,15 @@
         {
             if (await deckService.RemoveFromDeck(deckId, cardId))
             {
-                ViewData[MessageConstants.SuccessMessage] = "Картата беше премахната успешно!";
+                TempData[MessageConstants.SuccessMessage] = "Картата беше премахната успешно!";
             }
 
             else
             {
-                ViewData[MessageConstants.ErrorMessage] = "Неуспешнo премахване!";
+                TempData[MessageConstants.ErrorMessage] = "Неуспешнo премахване!";
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction(nameof(Index));
         }
 
         public async Task<IActionResult> Delete(Guid Id)
