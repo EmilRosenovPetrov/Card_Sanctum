@@ -14,9 +14,12 @@
 
         Task<IEnumerable<CreateDeckViewModel>> GetDecks(string id);
 
-        Task<CreateDeckViewModel> GetDeckForEdit(string id);
+        Task<CreateDeckViewModel> GetDeckForEdit(Guid id);
 
         Task<bool> UpdateDeck(CreateDeckViewModel model);
 
+        Task<bool> RemoveFromDeck(Guid deckId, Guid cardId);
+
+        Task<bool> DeleteAsync(Guid deckId);
     }
 }

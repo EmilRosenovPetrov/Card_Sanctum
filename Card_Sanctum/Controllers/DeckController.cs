@@ -18,16 +18,16 @@
             userManager = _userManager;
         }
 
-        public async Task<IActionResult> Index(string message = null)
+        public async Task<IActionResult> Index()
         {
             var userId = userManager.GetUserId(User);
 
             var model = await deckService.GetDecks(userId);
 
-            if (!string.IsNullOrEmpty(message))
-            {
-                ViewData[MessageConstants.InfoMessage] = message;
-            }
+
+            ViewData[MessageConstants.SuccessMessage] = TempData[MessageConstants.SuccessMessage];
+            ViewData[MessageConstants.ErrorMessage] = TempData[MessageConstants.ErrorMessage];
+
 
             if (!model.Any())
             {
@@ -54,7 +54,7 @@
             }
 
             if (await deckService.CreateDeck(model, userId))
-            {            
+            {
 
                 return RedirectToAction(nameof(Index), ViewData[MessageConstants.SuccessMessage] = "Тестето беше създадено успешно!");
             }
@@ -66,7 +66,7 @@
             return View(model);
         }
 
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> Edit(Guid id)
         {
             var model = await deckService.GetDeckForEdit(id);
 
@@ -83,15 +83,43 @@
 
             if (await deckService.UpdateDeck(model))
             {
-                ViewData[MessageConstants.SuccessMessage] = "Тестето беше коригирано успешно!";
+                TempData[MessageConstants.SuccessMessage] = "Тестето беше коригирано успешно!";
             }
 
             else
             {
-                ViewData[MessageConstants.ErrorMessage] = "Неуспешна корекция!";
+                TempData[MessageConstants.ErrorMessage] = "Неуспешна корекция!";
             }
 
-            return View(model);
+            return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> RemoveFromDeck(Guid deckId, Guid cardId)
+        {
+            if (await deckService.RemoveFromDeck(deckId, cardId))
+            {
+                ViewData[MessageConstants.SuccessMessage] = "Картата беше премахната успешно!";
+            }
+
+            else
+            {
+                ViewData[MessageConstants.ErrorMessage] = "Неуспешнo премахване!";
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> Delete(Guid Id)
+        {
+            if (await deckService.DeleteAsync(Id))
+            {
+                TempData[MessageConstants.SuccessMessage] = "Тестето беше премахнато успешно!";
+            }
+            else
+            {
+                TempData[MessageConstants.ErrorMessage] = "Неуспешнo премахване!";
+            }
+            return RedirectToAction(nameof(Index));
         }
     }
 

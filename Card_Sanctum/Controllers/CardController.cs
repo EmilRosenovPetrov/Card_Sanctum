@@ -34,8 +34,13 @@
             return View(model);
         }
 
-        public async Task<IActionResult> UserCards(int p = 1, int s = 10, string message = null)
+        public async Task<IActionResult> UserCards(int p = 1, int s = 10)
         {
+
+            ViewData[MessageConstants.SuccessMessage] = TempData[MessageConstants.SuccessMessage];
+            ViewData[MessageConstants.ErrorMessage] = TempData[MessageConstants.ErrorMessage];
+            
+
             var user = await userManager.GetUserAsync(User);
 
             var userId = await userManager.GetUserIdAsync(user);
@@ -86,23 +91,23 @@
        [HttpPost]
        public async Task<IActionResult> Add(UserDecksViewModel model)
        {
+            string message;
+
             var cardId = model.CardId;
             var deckId = model.DeckNames.GetValue(0).ToString();
 
             try
             {
                 await cardService.Add(cardId, deckId);
-                ViewData[MessageConstants.SuccessMessage] = "Картата беше добавена успешно!";
+                TempData[MessageConstants.SuccessMessage] = "Картата беше добавена успешно!";
             }
             catch (Exception)
             {
 
-                ViewData[MessageConstants.SuccessMessage] = "Неупешно добавяне!";
+                TempData[MessageConstants.ErrorMessage] = "Неупешно добавяне!";
             }
 
-
-
-            return Redirect(nameof(Index));
+            return RedirectToAction(nameof(UserCards));
        }
     }
 }

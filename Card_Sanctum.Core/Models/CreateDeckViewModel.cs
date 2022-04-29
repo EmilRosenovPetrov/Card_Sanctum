@@ -13,11 +13,15 @@
 
         [Required]
         [StringLength(50)]
+        [RegularExpression("^(([A-za-zА-яа-я]+[\\s]{1}[A-za-zА-яа-я]+)|([A-Za-zА-яа-я]+))$", ErrorMessage = "Name must include only letters and numbers!")]
         public string Name { get; set; }
 
         [StringLength(500)]
+        [RegularExpression("^(([A-za-zА-яа-я]+[\\s]{1}[A-za-zА-яа-я]+)|([A-Za-zА-яа-я]+))$", ErrorMessage = "Description must include only letters and numbers!")]
         public string? Description { get; set; }
 
         public string? UserId { get; set; }
+
+        public ICollection<CardListViewModel>? Cards { get; set; }
     }
 }

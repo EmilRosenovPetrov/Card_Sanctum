@@ -5,12 +5,12 @@
 
 @model IEnumerable<CreateDeckViewModel>
 
-<div class="content" style="max-width: 800px; background-color: white">
-    <div class="deck-header">
+<div class="content" >
+    <div class="deck" style="text-align: center">
         <h1 class="deck-title">All your decks:</h1>
     </div>
 
-    <div class="decks-body p-0">
+    <div class="deck">
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -23,22 +23,29 @@
             </thead>
             @foreach (var deck in Model)
             {
-                @using (Html.BeginForm("Edit", "Deck", FormMethod.Post))
-                {
-                    @Html.Hidden("id", deck.Id);
-                    <tbody>
-                        <tr>
+                @Html.Hidden("id", deck.Id)
+                ;
+                <tbody>
+                    <tr>
                         <td>@deck.Name</td>
-                        <td>@deck.Description</td>                     
+                        <td>@deck.Description</td>
                         <td>
-                            <button id="Index" method="post" class="btn btn-primary">Edit</button>                        
+                            @Html.ActionLink("Edit", "Edit", "Deck", new { id = deck.Id }, new { @class = "btn btn-primary" })
+                        </td>
+                        <td>
+                            @Html.ActionLink("Delete", "Delete", "Deck", new { id = deck.Id }, new { @class = "btn btn-danger" })
                         </td>
                     </tr>
                 </tbody>
-                }
-            }
-
+            }         
         </table>
+        
+                
+                <a href="~/deck/create" class="btn btn-primary" style="display:block; margin: 0 auto; max-width:80px;" >
+                    <p style="text-align:center">Create</p>
+                </a>
+
+                     
     </div>
 
 </div>

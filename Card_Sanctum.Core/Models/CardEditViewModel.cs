@@ -15,10 +15,12 @@
         [Required]
         [StringLength(100)]
         [Display(Name = "Name")]
+        [RegularExpression("^(([A-za-zА-яа-я]+[\\s]{1}[A-za-zА-яа-я]+)|([A-Za-zА-яа-я]+))$", ErrorMessage = "Name must include only letters and numbers!")]
         public string Name { get; set; }
 
         [StringLength(200)]
         [Display(Name = "Description")]
+        [RegularExpression("^(([A-za-zА-яа-я]+[\\s]{1}[A-za-zА-яа-я]+)|([A-Za-zА-яа-я]+))$", ErrorMessage = "Description must include only letters and numbers!")]
         public string? Description { get; set; }
 
         [Required]

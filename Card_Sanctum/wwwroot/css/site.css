@@ -16,3 +16,26 @@ html {
 body {
    
 }
+
+#nav-link-card {
+    content: url('/img/Cards/Common/card-icon.jpg');
+    width: 25px;
+}
+
+#nav-link-deck {
+    content: url('/img/Cards/Common/deck-icon.png');
+    width:  25px;
+}
+
+.content {
+    background: rgba(204, 204, 204, 0.5);
+    margin: auto;
+}
+.card {
+    background: rgba(204, 204, 204, 0.8);
+    margin: auto;
+}
+.deck {
+    background: rgba(204, 204, 204, 0.5);
+    margin: auto;
+}

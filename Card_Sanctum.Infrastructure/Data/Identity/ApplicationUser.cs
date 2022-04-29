@@ -26,7 +26,7 @@
 
         [Column(TypeName = "decimal(5, 2)")]
         [Range(0, (double)UserConstants.MaxUserBudget)]
-        public decimal Budget { get; set; } = 999;
+        public decimal Budget { get; set; } = 500;
 
         public ICollection<Card>? Cards { get; set; } = new List<Card>();
 
